@@ -280,6 +280,12 @@ bool CDVDVideoCodecMFC::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options) {
       m_name = "mfc-h263";
       break;
     case AV_CODEC_ID_H264:
+      switch(hints.profile)
+      {
+        case FF_PROFILE_H264_HIGH_10:
+        case FF_PROFILE_H264_HIGH_10_INTRA:
+          return false;
+      }
       fmt.fmt.pix_mp.pixelformat = V4L2_PIX_FMT_H264;
       m_name = "mfc-h264";
       break;
